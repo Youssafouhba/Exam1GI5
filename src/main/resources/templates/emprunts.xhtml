@@ -1,0 +1,63 @@
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">Mes Emprunts</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:tabView>
+                <p:tab title="Emprunts en cours">
+                    <p:dataTable value="#{empruntBean.empruntsActifs}" var="emprunt"
+                                 emptyMessage="Aucun emprunt en cours">
+                        <p:column headerText="Média">
+                            <h:outputText value="#{emprunt.media.titre}"/>
+                        </p:column>
+
+                        <p:column headerText="Date d'emprunt">
+                            <h:outputText value="#{emprunt.dateEmprunt}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Date de retour prévue">
+                            <h:outputText value="#{emprunt.dateRetourPrevue}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Actions">
+                            <p:commandButton value="Retourner"
+                                             action="#{empruntBean.retournerMedia(emprunt.media.id)}"
+                                             update="@form"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+
+                <p:tab title="Historique">
+                    <p:dataTable value="#{empruntBean.historiqueEmprunts}" var="emprunt"
+                                 emptyMessage="Aucun historique d'emprunt">
+                        <p:column headerText="Média">
+                            <h:outputText value="#{emprunt.media.titre}"/>
+                        </p:column>
+
+                        <p:column headerText="Emprunté le">
+                            <h:outputText value="#{emprunt.dateEmprunt}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Retourné le">
+                            <h:outputText value="#{emprunt.dateRetour}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+            </p:tabView>
+        </h:form>
+    </ui:define>
+</ui:composition>

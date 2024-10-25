@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Médiathèque - <ui:insert name="title"/></title>
+    <h:outputStylesheet name="css/style.css"/>
+</h:head>
+<h:body>
+    <div id="header">
+        <h:form>
+            <p:menubar>
+                <p:menuitem value="Accueil" outcome="/user/home"/>
+                <p:menuitem value="Recherche" outcome="/user/search"/>
+                <p:menuitem value="Mes Emprunts" outcome="/user/emprunts"/>
+                <p:menuitem value="Mon Profil" outcome="/user/profile"/>
+            </p:menubar>
+        </h:form>
+    </div>
+
+    <div id="content">
+        <ui:insert name="content"/>
+    </div>
+
+    <div id="footer">
+        <p>Médiathèque © 2024</p>
+    </div>
+</h:body>
+</html>

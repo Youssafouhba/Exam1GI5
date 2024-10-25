@@ -1,0 +1,38 @@
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">Recherche</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:panel header="Recherche de médias">
+                <h:panelGrid columns="3">
+                    <p:inputText value="#{empruntBean.searchTerm}" placeholder="Titre du média"/>
+                    <p:commandButton value="Rechercher" action="#{empruntBean.searchMedia}" update="results"/>
+                </h:panelGrid>
+
+                <p:dataTable id="results" value="#{empruntBean.searchResults}" var="media"
+                             emptyMessage="Aucun média trouvé">
+                    <p:column headerText="Titre">
+                        <h:outputText value="#{media.titre}"/>
+                    </p:column>
+
+                    <p:column headerText="Type">
+                        <h:outputText value="#{media.type}"/>
+                    </p:column>
+
+                    <p:column headerText="Actions">
+                        <p:commandButton value="Emprunter"
+                                         action="#{empruntBean.emprunterMedia(media.id)}"
+                                         update="@form"
+                                         disabled="#{media.emprunte}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
